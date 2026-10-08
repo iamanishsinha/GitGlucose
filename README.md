@@ -1,41 +1,78 @@
-# GITGLUCOSE
-> ### **"Roast the Git. Rescue with Glucose."**
-> **GitHub Portfolio Intelligence & Evidence-Grounded Audit Engine**
-> *PromptWars × The Prompt Arena Hackathon Build*
+# GitGlucose
 
-[![Tests](https://img.shields.io/badge/tests-18%20passed-success)](https://github.com/)
-[![Node.js](https://img.shields.io/badge/node.js-v20%2B-blue)](https://nodejs.org/)
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-[![Deployment](https://img.shields.io/badge/deploy-Google%20Cloud%20Run-blueviolet)](https://cloud.google.com/run)
+> **"Roast the Git. Rescue with Glucose."**  
+> An evidence-grounded GitHub portfolio auditor that gives candidates an honest, data-backed roast, simulates 30 seconds of recruiter attention, and prescribes an actionable rescue plan.
+
+[![Tests](https://img.shields.io/badge/tests-32%20passed-success?style=flat-square)](https://github.com/iamanishsinha/Git_Glucose)
+[![Node.js](https://img.shields.io/badge/node.js-v20%2B-339933?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
+[![Cloud Run](https://img.shields.io/badge/deploy-Google%20Cloud%20Run-4285F4?style=flat-square&logo=googlecloud&logoColor=white)](https://cloud.google.com/run)
+[![Single Branch](https://img.shields.io/badge/git%20branch-main%20only-informational?style=flat-square)](https://github.com/iamanishsinha/Git_Glucose)
 
 ---
 
-## 1. Challenge & Executive Summary
+## Table of Contents
+
+1. [Executive Summary](#executive-summary)
+2. [The Problem & Target Persona](#the-problem--target-persona)
+3. [The 5-Step Audit Journey](#the-5-step-audit-journey)
+4. [Architecture & Philosophy](#architecture--philosophy)
+5. [Deterministic Scoring Engine](#deterministic-scoring-engine)
+6. [30-Second Recruiter Attention Scan](#30-second-recruiter-attention-scan)
+7. [Rescue System & Live Score Projection](#rescue-system--live-score-projection)
+8. [Side-by-Side Profile Comparison](#side-by-side-profile-comparison)
+9. [Token Security & GitHub API Usage Rules](#token-security--github-api-usage-rules)
+10. [Repository Structure](#repository-structure)
+11. [Getting Started & Local Development](#getting-started--local-development)
+12. [Cloud Run Deployment](#cloud-run-deployment)
+13. [Hackathon Alignment](#hackathon-alignment)
+
+---
+
+## Executive Summary
 
 * **Event:** PromptWars × The Prompt Arena
 * **Organizers:** Pondicherry University, IIC, Hack2Skill, Google Developer Groups (GDG), Google for Developers
-* **Selected Challenge:** **GITHUB ROAST AND RESCUE**
-* **Challenge Intent:** *"Give a messy GitHub profile the honest feedback it deserves."*
+* **Track:** **GitHub Roast and Rescue**
+* **Repository:** [https://github.com/iamanishsinha/Git_Glucose.git](https://github.com/iamanishsinha/Git_Glucose.git)
 
-### Why GitGlucose?
-Most AI profile tools produce generic, hallucinated flattery or superficial insults that offer zero actionable guidance. **GitGlucose** bridges this gap:
-1. **Roast the Git:** Audits the public GitHub profile honestly with razor-sharp observational wit backed **strictly** by verifiable data.
-2. **Rescue with Glucose:** Translates every detected flaw into a prioritized, measurable 30-minute prescription and a 7-day recovery roadmap.
-
----
-
-## 2. Problem Statement & Target Persona
-
-### Primary Persona
-* **Target Audience:** Computer Science students, boot camp graduates, early-career engineers, and hackathon competitors preparing for technical internships and full-time hiring.
-* **The Reality:** 
-  - Over **70%** of early-career GitHub profiles suffer from blank bios, missing profile READMEs, vague repository titles (`test-1`, `final_proj`), absent descriptions, and zero installation documentation.
-  - Technical recruiters spend only **15 to 30 seconds** scanning a public GitHub before deciding whether to shortlist or pass.
-* **The Solution:** GitGlucose gives candidates an immediate simulation of what a recruiter notices, proves *why* the roast happened via transparent fact-to-inference tracing, and prescribes exact steps to maximize portfolio signal.
+Most AI portfolio feedback tools generate generic flattery or superficial roasts detached from reality. **GitGlucose** takes a radically grounded approach:
+1. **Roast the Git:** Audits the candidate's public GitHub footprint with sharp observational wit, backed strictly by verified facts (no hallucinations).
+2. **Rescue with Glucose:** Translates detected vulnerabilities into an immediate 30-minute quick-win checklist and a structured 7-day engineering sprint roadmap.
 
 ---
 
-## 3. Core Product Philosophy & Architecture
+## The Problem & Target Persona
+
+### Target Persona
+Computer science students, bootcamp graduates, early-career developers, and hackathon competitors preparing for internship and junior engineering screening.
+
+### The Reality
+* **Recruiter Window:** Technical recruiters spend **15 to 30 seconds** scanning a candidate's GitHub before deciding whether to shortlist or reject.
+* **Common Gaps:** Over 70% of candidate profiles suffer from blank bios, missing profile READMEs, vague repository names (`test-1`, `final_proj`), absent descriptions, and zero live demo links.
+* **The Solution:** GitGlucose gives candidates an instant simulation of recruiter scrutiny, transparent evidence tracing, and prioritized fixes to maximize portfolio signal.
+
+---
+
+## The 5-Step Audit Journey
+
+GitGlucose features a responsive Single Page Application (SPA) dashboard structured across 5 dedicated views:
+
+```
+[ 1. Quick Roast ] ➔ [ 2. Deep Dive ] ➔ [ 3. Rescue Plan ] ➔ [ 4. Career Fit ] ➔ [ 5. Compare ]
+```
+
+| Step | View | Key Highlights |
+|:---:|---|---|
+| **1** | **Quick Roast** | 5-axis overall Git Health Score (0–100), verdict tier badge, sharp data-grounded roast bullets, suggested bio rewrite, and one-click navigation forks. |
+| **2** | **Deep Dive** | Interactive 5-axis SVG Radar Geometry, 30-second recruiter simulation breakdown, and a ranked repository table with signal and lifecycle tags. |
+| **3** | **Rescue Plan** | 30-Minute time-boxed checklist with interactive checkboxes that dynamically increase your projected score in real time, plus a 7-day sprint plan. |
+| **4** | **Career Fit** | In-place role positioning against 6 developer profiles (*Full Stack, Backend, Frontend, AI/ML, DevOps, Generalist*) with matched evidence. |
+| **5** | **Compare** | Real side-by-side profile battle: overall winner declaration, 9-category winner grid, comparative progress bars, and custom strengths/improvements. |
+
+---
+
+## Architecture & Philosophy
 
 ```
                     ┌──────────────────────────────────────────────┐
@@ -43,6 +80,7 @@ Most AI profile tools produce generic, hallucinated flattery or superficial insu
                     └──────────────────────┬───────────────────────┘
                                            │
                            Parallel REST Calls (User + Repos + README)
+                           Auto-Pagination for 10, 50, 100+ Repositories
                                            │
                                            ▼
                     ┌──────────────────────────────────────────────┐
@@ -54,221 +92,233 @@ Most AI profile tools produce generic, hallucinated flattery or superficial insu
                     │      DETERMINISTIC ANALYSIS ENGINE           │
                     │   • 5-Dimension Score Calculation            │
                     │   • Fact ➔ Inference ➔ Action Findings       │
-                    │   • Composite Repo Ranking & Lifecycle       │
-                    │   • Recruiter Attention Simulation           │
-                    │   • Simulated Before/After Projection        │
-                    └──────────────────────┬───────────────────────┘
-                                           │
-                            Constrained Audit Payload
-                                           │
-                                           ▼
-                    ┌──────────────────────────────────────────────┐
-                    │       GEMINI 2.5 FLASH PERSONALITY           │
-                    │      (Personality & Roast Writing ONLY)      │
-                    │     * Seamless Deterministic Fallback *      │
+                    │   • 30-Second Recruiter Attention Model      │
+                    │   • Precomputed 6-Role Career Matrices       │
+                    │   • Dynamic Score Projection Model           │
                     └──────────────────────┬───────────────────────┘
                                            │
                                            ▼
                     ┌──────────────────────────────────────────────┐
-                    │        CANONICAL ANALYSISRESULT OBJECT       │
+                    │    ROAST DELIVERY & ZERO-FAIL FALLBACK       │
+                    │   • Strict Fact-to-Inference Grounding       │
+                    │   • 100% Reliable Deterministic Fallback     │
+                    │   • Zero External Runtime Dependencies       │
                     └──────────────────────┬───────────────────────┘
                                            │
-     ┌─────────────────────────────────────┴─────────────────────────────────────┐
-     ▼                                     ▼                                     ▼
-QUICK ROAST                           DEEP ROAST                            RECRUITER EYE
- • Health Score (0-100)                • Traceable Evidence                  • 30-Sec Timeline
- • Witty Roast Lines                   • Consistency Matrix                  • Shortlist Sim
- • Dimension Breakdown                 • AI-Assistance Signal                • Gaps & Strengths
-     │                                     │                                     │
-     └─────────────────────────────────────┼─────────────────────────────────────┘
                                            ▼
-                                      RESCUE PLAN
-                               • 30-Minute Quick Prescription
-                               • 7-Day Full Recovery Roadmap
-                               • Simulated +Points Potential
+                    ┌──────────────────────────────────────────────┐
+                    │          INTERACTIVE SPA DASHBOARD           │
+                    │   [Roast] [Deep] [Rescue] [Career] [Compare] │
+                    └──────────────────────────────────────────────┘
 ```
 
-### Critical Architectural Rule
-> **The Deterministic Engine decides what is true. Gemini decides how to say it.**
-- Gemini **never** invents facts or calculates scores.
-- The backend evaluates the profile deterministically, compiles verified evidence, and passes a constrained payload to Gemini for witty delivery.
-- If Gemini times out, hits rate limits, or is unconfigured, GitGlucose's **Deterministic Fallback Engine** generates 100% reliable roast lines and bio suggestions. The product never crashes.
+### Core Architectural Principle
+> **The Deterministic Engine decides what is true. The Delivery Layer decides how to present it.**
+* The analyzer compiles verified facts (repository sizes, description hygiene, commit momentum, README coverage).
+* If external AI providers hit rate limits or are disabled, GitGlucose's **Deterministic Delivery Engine** takes over seamlessly. The application never fails or crashes.
 
 ---
 
-## 4. Deterministic Scoring System
+## Deterministic Scoring Engine
 
-Profiles are evaluated across 5 weighted dimensions to produce the final **Git Health Score (0–100)**:
+GitGlucose computes an overall **Git Health Score (0–100)** across five mathematically weighted dimensions:
 
 | Dimension | Weight | Signals Evaluated |
 |---|:---:|---|
-| **First Impression** | **25%** | Profile bio completeness, Profile README presence, distinct user identity, social/blog links. |
-| **Repository Hygiene** | **20%** | Percentage of repositories with descriptions (>=15 chars), README coverage, and noise/junk repository avoidance. |
-| **Substance** | **25%** | Original non-fork ratio, code size (>50 KB), multi-repository volume, and community validation. |
-| **Activity Momentum** | **20%** | Public push recency (`pushed_at`), activity concentration, and commits in the last 30/90/180/365 days. |
-| **Technical Range** | **10%** | Language count and balance across repositories (penalizing superficial 1-line file accumulation). |
+| **First Impression** | **25%** | Display name presence, bio completeness, profile README presence, social/blog links. |
+| **Repository Hygiene** | **20%** | Percentage of repositories with descriptions (>=15 chars), README documentation coverage, and noise repository avoidance. |
+| **Substance** | **25%** | Original non-fork ratio, code depth (>50 KB), multi-repository volume, and community validation. |
+| **Activity Momentum** | **20%** | Public push recency (`pushed_at`), activity distribution, and commit recency. |
+| **Technical Range** | **10%** | Language count and balance across repositories (penalizing superficial single-line repository padding). |
 
 ### Verdict Tiers
-* `90–100`: **EXCEPTIONAL** — High-signal portfolio ready for senior review.
-* `75–89`: **STRONG** — Solid foundation requiring only polish and live deployment links.
+* `90–100`: **EXCEPTIONAL** — High-signal portfolio ready for senior engineering review.
+* `75–89`: **STRONG** — Solid foundation requiring targeted polish and live demo URLs.
 * `60–74`: **DEVELOPING** — Good project seeds buried under uneven presentation and documentation gaps.
-* `40–59`: **MESSY / NEEDS WORK** — High noise-to-signal ratio; recruiter attention will drop off quickly.
-* `0–39`: **BLANK / VERY WEAK SIGNAL** — Sparse public footprint; urgent rescue required.
+* `40–59`: **MESSY / NEEDS WORK** — High noise-to-signal ratio; recruiter attention drops off rapidly.
+* `0–39`: **BLANK / CRITICAL** — Sparse public footprint; urgent portfolio rescue required.
 
 ---
 
-## 5. Recruiter Eye: 30-Second Attention Simulation
+## 30-Second Recruiter Attention Scan
 
-Simulates how a technical recruiter or engineering manager scans a GitHub portfolio:
+GitGlucose models the real-world cognitive process of a technical recruiter scanning a GitHub profile:
 
-1. **0–5 sec — Identity & First Impression:** Bio presence and clarity of engineering focus.
-2. **5–10 sec — Profile Landing & Context:** Profile README presence and pinned repositories.
-3. **10–20 sec — Project Selection & Depth:** Top 3 repository titles, descriptions, and substance.
-4. **20–25 sec — Technology Stack Clarity:** Dominant languages and stack consistency.
-5. **25–30 sec — Activity & Commitment:** Recency of pushes and ongoing learning momentum.
-
-### Shortlist Simulation (🟢 SHORTLIST / 🟡 MAYBE / 🔴 PASS)
-* Clearly labeled as an **analytical portfolio simulation**, never an absolute hiring decision.
-
----
-
-## 6. The Rescue System
-
-* **30-Minute Quick Prescription:** 5 time-boxed actions (0–5m, 5–10m, 10–20m, 20–27m, 27–30m) with interactive checkboxes and a live progress tracker.
-* **7-Day Full Recovery Roadmap:** Structured daily roadmap from Day 1 (Identity) to Day 7 (Recruiter Benchmark).
-* **Recovery Projection Simulation:** Projects realistic potential score gains (e.g. `+14 PTS`) based on addressable findings.
-
----
-
-## 7. Advanced Featured Intelligence
-
-1. **Repository Ranking:** Evaluates every repository across 6 criteria (Clarity, Documentation, Substance, Activity, Completeness, Portfolio Relevance) and tags them with Signal (`HIGH SIGNAL`, `MEDIUM SIGNAL`, `LOW SIGNAL`, `NOISE / EXPERIMENTAL`) and Lifecycle (`ACTIVE`, `EXPERIMENTAL`, `STALE`, `ABANDONED`).
-2. **Technology Intelligence:** Analyzes language distribution and separates **Detected** languages from **Inferred** framework ecosystems.
-3. **Activity Analytics:** Breakdown of push recency across time buckets (30d, 90d, 180d, 365d, >1y).
-4. **Career Positioning:** Interactive alignment matrices for roles (Full Stack, Backend, Frontend, AI/ML, DevOps, Generalist).
-5. **Compare Profiles:** Side-by-side comparison between two developers generating objective, neutral observations without declaring who is "better".
-6. **Roast History:** Saved locally in browser `localStorage`.
-7. **Markdown Export:** Generates and downloads a timestamped report (`gitglucose_<username>_<timestamp>.md`).
-
----
-
-## 8. Judging Evaluation Parameters Alignment
-
-### 1. Code Quality
-* Pure modular architecture: cleanly separated into `server/` (scoring, github, rules, analyzer, validation, fallback) and `public/` (accessible UI).
-* Zero messy monolithic files. Single source of truth canonical `AnalysisResult`.
-
-### 2. Security
-* Strict GitHub username regex validation (`^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$`).
-* Production security headers: `Content-Security-Policy`, `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, `Referrer-Policy: no-referrer`.
-* In-memory sliding-window per-IP rate limiting (30 requests/min).
-* **Zero secrets exposed**: `GEMINI_API_KEY` and `GITHUB_TOKEN` remain strictly server-side; `.env` is ignored by git.
-
-### 3. Efficiency & Repository Size
-* **Zero bloated client bundles**: Vanilla ES modules with sub-50ms page load.
-* Total repository code size is **< 1 MB** (well under the **10 MB limit**).
-* Exactly **one branch** (`main`).
-* Parallel GitHub API fetches using `Promise.all`.
-* Bounded LRU/TTL in-memory caching (10 min TTL, max 200 items).
-
-### 4. Testing
-* Built with Node.js native `node:test` and `node:assert`.
-* **18 comprehensive unit & integration tests** covering validation, rules, repository scoring, fallback roasts, profile comparison, master analyzer, and API endpoints.
-
-```bash
-npm test
+```
+[0–5 SEC]   Identity & First Impression  ➔ Bio completeness & engineering direction
+[5–10 SEC]  Profile Landing & Context    ➔ Profile README front door & flagship project
+[10–20 SEC] Repository Selection & Depth ➔ Original codebases vs forks, README depth & size
+[20–25 SEC] Live Demos & Consistency     ➔ Working demo URLs & commit momentum
+[25–30 SEC] Screening Verdict            ➔ Shortlist Decision (SHORTLIST / MAYBE / PASS)
 ```
 
-### 5. Accessibility (WCAG Compliant)
-* Semantic HTML5 elements (`<main>`, `<aside>`, `<nav>`, `<button>`).
-* Visible focus rings (`:focus-visible`) across all interactive elements.
-* Screen reader live regions (`aria-live="polite"`) for audit announcements.
-* Contrast compliant dark editorial palette.
-* Full `@media (prefers-reduced-motion: reduce)` support.
-
-### 6. Problem Statement Alignment
-* Specifically built for **GitHub Roast and Rescue**.
-* Tagline: **"Roast the Git. Rescue with Glucose."**
+All 5 windows are dynamically populated with real candidate data, key signals, and actionable feedback.
 
 ---
 
-## 9. Local Setup & Testing
+## Rescue System & Live Score Projection
+
+* **30-Minute Quick Wins:** Time-boxed tasks (5m, 10m, 15m) targeting immediate high-impact fixes (e.g. bio rewrite, adding missing descriptions, linking live deployments).
+* **Interactive Score Booster:** Checking off completed tasks immediately increases the candidate's projected score in real time (`+4 pts` per task completed).
+* **7-Day Sprint:** Structured daily engineering roadmap taking a portfolio from messy to recruiter-ready:
+  - *Day 1:* Profile Front Door & Identity
+  - *Day 2:* Flagship Project Architecture Documentation
+  - *Day 3:* Code Hygiene & Junk Repo Archive
+  - *Day 4:* Live Deployments & Demo Links
+  - *Day 5:* Technology Stack Evidence Alignment
+  - *Day 6:* Commit Momentum & Polish
+  - *Day 7:* Recruiter Benchmark & Final Verification
+
+---
+
+## Side-by-Side Profile Comparison
+
+Compare any two GitHub profiles side-by-side:
+* **Current Audit Pre-fill:** Profile A automatically reflects your active audit.
+* **Overall Winner Card:** Highlights the stronger overall portfolio and the lead differential (e.g., `@iamanishsinha takes the lead (+25 pts)`).
+* **Category Winners Grid:** 9 distinct category cards (Overall Health, Code Hygiene, Substance, Momentum, Language Diversity, Stars, Repositories, Followers, Live Demos).
+* **Comparative Metric Bars:** Side-by-side visual indicators with units.
+* **Custom Actionable Takeaways:** Tailored strengths and specific improvement areas for both developers.
+
+---
+
+## Token Security & GitHub API Usage Rules
+
+GitGlucose strictly adheres to production token management principles:
+
+1. **Default Mode is Public:** Development, local runs, automated tests, and judge evaluations run under `GITHUB_AUTH_MODE=public`.
+2. **TOKEN PRESENT ≠ TOKEN AUTHORIZED FOR USE:** The server will never silently consume a token unless `GITHUB_AUTH_MODE=authenticated` is explicitly configured.
+3. **No Automatic Token Fallback:** If GitHub returns `429 Rate Limited`, the system displays a clear and structured rate-limit advisory instead of secretly consuming personal credentials.
+4. **Zero Tracked Secrets:** All `.env` and `Token.env` files are excluded from Git tracking via `.gitignore`.
+5. **DNS IPv4 Optimization:** Automatically enforces IPv4 resolution order (`dns.setDefaultResultOrder('ipv4first')`) to prevent Windows IPv6 connection timeouts.
+
+---
+
+## Repository Structure
+
+```
+GitGlucose/
+├── public/                       # Static Frontend (Zero build step, vanilla ES modules)
+│   ├── index.html                # Accessible semantic HTML5 layout & SPA views
+│   ├── styles.css                # Custom CSS (Inter + JetBrains Mono, WCAG contrast)
+│   └── app.js                    # SPA state machine, SVG radar chart, interactive checklist
+├── server/                       # Node.js HTTP Server & Core Intelligence Engines
+│   ├── index.html                # (Root redirection guard)
+│   ├── index.js                  # Production HTTP server, rate limiter, security headers
+│   ├── github.js                 # GitHub API client, pagination, memory caching, DNS resolver
+│   ├── analyzer.js               # 5-axis scoring, recruiter scan, and role positioning
+│   ├── comparison.js             # Neutral, side-by-side developer comparison engine
+│   ├── validate.js               # Strict GitHub username validation and sanitization
+│   ├── rules.js                  # Score weight constants and role matrices
+│   ├── fallback.js               # Zero-failure deterministic roast generation
+│   └── gemini.js                 # Optional Gemini Flash personality enhancement
+├── scripts/                      # Pre-submission verification protocols
+│   └── verify-submission.js      # 5-stage verification (tests, branches, secrets, size, docker)
+├── test/                         # Native node:test suite (Zero external dependencies)
+│   ├── analyzer.test.js          # Scoring engine accuracy tests
+│   ├── comparison.test.js        # Comparative differential tests
+│   ├── endpoints.test.js         # HTTP API endpoint tests
+│   ├── fallback.test.js          # Fallback reliability tests
+│   ├── github-auth.test.js       # Strict token control and auth mode tests
+│   ├── repository.test.js        # Repo ranking and signal tests
+│   ├── rules.test.js             # Weight balance and matrix tests
+│   ├── validation.test.js        # Username and input sanitization tests
+│   └── flow-verification.js      # End-to-end integration verification script
+├── Dockerfile                    # Multi-stage production container for Cloud Run
+├── .dockerignore                 # Container build exclusions
+├── .gitignore                    # Secrets, node_modules, and cache ignore rules
+├── .env.example                  # Template configuration file
+├── package.json                  # Scripts and manifest (zero external dependencies)
+└── README.md                     # Comprehensive documentation
+```
+
+---
+
+## Getting Started & Local Development
 
 ### Prerequisites
-* Node.js v20+ or v22+
-* npm
+* **Node.js**: `v20.0.0` or higher
+* **npm**: `v9.0.0` or higher
 
-### Quick Start
+### Quick Start (3 Steps)
+
 ```bash
-# 1. Clone repository
-git clone https://github.com/<username>/GitGlucose.git
-cd GitGlucose
+# 1. Clone the repository
+git clone https://github.com/iamanishsinha/Git_Glucose.git
+cd Git_Glucose
 
-# 2. Configure environment (optional)
-cp .env.example .env
-
-# 3. Run automated tests
+# 2. Run automated test suite (32 tests)
 npm test
 
-# 4. Start local production server
+# 3. Start the production server
 npm start
 ```
-Open [http://localhost:8080](http://localhost:8080) in your browser.
+
+Visit **[http://localhost:8080](http://localhost:8080)** in your browser.
 
 ---
 
-## 10. Cloud Run Deployment
+## Verification Protocols
 
-GitGlucose is containerized and ready for Google Cloud Run:
+Run the official pre-submission compliance audit:
 
 ```bash
-# Build & Deploy to Google Cloud Run
+npm run verify
+```
+
+Expected output:
+```text
+====================================================
+  GITGLUCOSE PRE-SUBMISSION VERIFICATION PROTOCOL
+====================================================
+[1/5] Running automated test suite (node:test)...
+  ✔ All tests passed successfully (32/32).
+[2/5] Checking Git branches (Must have EXACTLY ONE branch)...
+  ✔ Exactly one branch detected: * main
+[3/5] Scanning for sensitive environment secrets in Git index...
+  ✔ No forbidden secret files tracked in Git.
+[4/5] Checking repository size (Must be LESS THAN 10 MB)...
+  Total project code size: ~0.26 MB (< 10 MB limit).
+[5/5] Checking Cloud Run Dockerfile and healthcheck requirements...
+  ✔ Dockerfile and .dockerignore are present.
+====================================================
+  VERIFICATION RESULT: ALL CHECKS PASSED (100% READY)!
+====================================================
+```
+
+---
+
+## Cloud Run Deployment
+
+GitGlucose is fully containerized and deployable to Google Cloud Run:
+
+```bash
+# Deploy to Google Cloud Run
 gcloud run deploy gitglucose \
   --source . \
   --region asia-south1 \
   --allow-unauthenticated \
   --port 8080 \
-  --set-env-vars="NODE_ENV=production,GEMINI_MODEL=gemini-2.5-flash" \
-  --set-secrets="GEMINI_API_KEY=GEMINI_API_KEY:latest"
+  --set-env-vars="NODE_ENV=production,PORT=8080,GITHUB_AUTH_MODE=public"
 ```
 
-* Cloud Run Health Check Endpoint: `GET /healthz` returns `{"ok": true, "status": "healthy"}`.
+* **Healthcheck Endpoint:** `GET /healthz` returns `{"ok": true, "status": "healthy", "version": "1.0.0"}` with HTTP 200.
 
 ---
 
-## 11. Assumptions & Data Limitations
+## Hackathon Alignment
 
-1. **Public Data Only:** Only public GitHub profile and repository metadata are accessible; private repositories/commits are not factored in.
-2. **Activity Proxy:** Repository push timestamps (`pushed_at`) serve as an activity proxy.
-3. **AI-Assistance Signal:** Calculated via repository naming and topic heuristics; public metadata cannot measure exact code percentage authorship.
-4. **Simulations:** Recruiter Shortlist and Before/After projections are analytical simulations, not hiring guarantees.
+| Judging Parameter | Implementation in GitGlucose |
+|---|---|
+| **Code Quality & Architecture** | Modular Node.js ESM architecture with cleanly separated concerns. Canonical `AnalysisResult` contract. Zero spaghetti code. |
+| **Security & Privacy** | Strict regex input sanitization, CSP/nosniff/X-Frame headers, in-memory IP rate limiting, zero tracked secrets. |
+| **Efficiency & Repository Size** | Zero bloated client frameworks. Sub-50ms page load. Total project code size is **0.26 MB** (well under the 10 MB limit). |
+| **Testing & Reliability** | **32 automated tests** using native `node:test`. 100% deterministic fallback guarantees zero crashes even under API outages. |
+| **Accessibility (WCAG)** | Semantic HTML5, visible focus indicators, screen reader live regions (`aria-live`), high-contrast SaaS palette, reduced motion support. |
+| **Challenge Alignment** | Specifically designed for the **GitHub Roast and Rescue** challenge. Tagline: *"Roast the Git. Rescue with Glucose."* |
 
 ---
 
-## 12. LinkedIn Post Template
+## License
 
-```text
-🚀 Excited to unveil GitGlucose for the PromptWars × The Prompt Arena Hackathon!
-
-Challenge: GitHub Roast and Rescue
-Tagline: "Roast the Git. Rescue with Glucose."
-
-Most portfolio reviews are either generic flattery or superficial roasts. We built GitGlucose to change that.
-
-🔍 What it does:
-1. Quick Roast: Witty, observational roast backed strictly by verifiable GitHub data.
-2. Recruiter Eye: 30-second simulation of recruiter attention and shortlist probability.
-3. Deep Roast: Fact ➔ Inference ➔ Prescription traceability.
-4. Rescue Plan: 30-minute quick prescription & 7-day recovery roadmap.
-
-Built with pure Node.js, deterministic scoring engines, Gemini 2.5 Flash, and deployed on Google Cloud Run.
-
-Check it out:
-GitHub: https://github.com/<user>/GitGlucose.git
-Live App: https://gitglucose-service.run.app
-
-#PromptWars #GoogleDevelopers #GDG #GitHub #Gemini #Hackathon #WebDev
-```
-#   G i t _ G l u c o s e  
- #   G i t G l u c o s e  
- 
+This project is licensed under the [MIT License](LICENSE).
