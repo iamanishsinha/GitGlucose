@@ -1,35 +1,37 @@
 /* ==========================================================================
-   GitGlucose — Clean SaaS Dashboard Design System
-   Palette: White cards on light gray ground, dark ink, accent orange.
+   GitGlucose — Warm Gold Grid Dashboard Design System
+   Palette: Warm gold ground (#EDD377) with thin-line boxed grid,
+   ivory surfaces, deep warm ink, and rich terracotta accents.
    No overlapping elements. Flexbox/Grid. Tab-based navigation.
    ========================================================================== */
 
 /* ── Design Tokens ── */
 :root {
-  --bg:            #F4F5F7;
-  --surface:       #FFFFFF;
-  --surface-hover: #F8F9FA;
-  --border:        #E1E4E8;
-  --border-strong: #C6CBD1;
+  --bg:            #EDD377;
+  --bg-grid:       rgba(26, 25, 23, 0.08);
+  --surface:       #FFFDF5;
+  --surface-hover: #F8F1D2;
+  --border:        rgba(26, 25, 23, 0.14);
+  --border-strong: rgba(26, 25, 23, 0.28);
 
-  --ink:           #0D1117;
-  --ink-2:         #24292F;
-  --ink-3:         #57606A;
-  --ink-4:         #8C959F;
+  --ink:           #141310;
+  --ink-2:         #2B2822;
+  --ink-3:         #575246;
+  --ink-4:         #878070;
 
-  --accent:        #E55B2D;
-  --accent-dark:   #C0391A;
-  --accent-bg:     rgba(229, 91, 45, 0.08);
-  --accent-border: rgba(229, 91, 45, 0.30);
+  --accent:        #B83713;
+  --accent-dark:   #942B0D;
+  --accent-bg:     rgba(184, 55, 19, 0.10);
+  --accent-border: rgba(184, 55, 19, 0.32);
 
-  --green:         #1A7F37;
-  --green-bg:      #DAFBE1;
-  --yellow:        #9A6700;
-  --yellow-bg:     #FFF8C5;
-  --red:           #CF222E;
-  --red-bg:        #FFEBE9;
-  --blue:          #0550AE;
-  --blue-bg:       #DFF0FF;
+  --green:         #136629;
+  --green-bg:      #D7F3DE;
+  --yellow:        #785000;
+  --yellow-bg:     #F9EBAB;
+  --red:           #A81A22;
+  --red-bg:        #FFE3E1;
+  --blue:          #084A96;
+  --blue-bg:       #D8ECFF;
 
   --font:          'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --mono:          'JetBrains Mono', ui-monospace, SFMono-Regular, monospace;
@@ -37,16 +39,30 @@
   --header-h:      60px;
   --radius:        8px;
   --radius-lg:     12px;
-  --shadow-sm:     0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
-  --shadow-md:     0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
-  --shadow-lg:     0 8px 24px rgba(0,0,0,.10), 0 4px 8px rgba(0,0,0,.06);
+  --shadow-sm:     0 1px 3px rgba(35, 25, 5, 0.07), 0 1px 2px rgba(35, 25, 5, 0.04);
+  --shadow-md:     0 4px 12px rgba(35, 25, 5, 0.09), 0 2px 4px rgba(35, 25, 5, 0.04);
+  --shadow-lg:     0 8px 24px rgba(35, 25, 5, 0.12), 0 4px 8px rgba(35, 25, 5, 0.06);
   --transition:    150ms cubic-bezier(0.4,0,0.2,1);
 }
 
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { background: var(--bg); color: var(--ink); font-family: var(--font); font-size: 15px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
-body { min-height: 100vh; }
+html {
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(to right, var(--bg-grid) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--bg-grid) 1px, transparent 1px);
+  background-size: 28px 28px;
+  color: var(--ink);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  min-height: 100vh;
+  background-color: transparent;
+}
 a { color: inherit; text-decoration: none; }
 button, input, select, textarea { font: inherit; }
 img { display: block; max-width: 100%; }
@@ -64,7 +80,7 @@ img { display: block; max-width: 100%; }
   top: 0;
   z-index: 100;
   height: var(--header-h);
-  background: rgba(255,255,255,.95);
+  background: rgba(237, 211, 119, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
@@ -133,18 +149,19 @@ img { display: block; max-width: 100%; }
   white-space: nowrap;
   transition: background var(--transition), color var(--transition);
 }
-.step-tab:hover { background: var(--bg); color: var(--ink-2); }
+.step-tab:hover { background: rgba(26, 25, 23, 0.08); color: var(--ink); }
 .step-tab.active {
-  background: var(--accent-bg);
+  background: var(--surface);
   color: var(--accent);
-  border: 1px solid var(--accent-border);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
 }
 .tab-num {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--border);
-  color: var(--ink-3);
+  background: rgba(26, 25, 23, 0.12);
+  color: var(--ink-2);
   font-size: 11px;
   font-weight: 700;
   display: flex;
@@ -301,7 +318,7 @@ img { display: block; max-width: 100%; }
 }
 .input-group:focus-within {
   border-color: var(--ink);
-  box-shadow: 0 0 0 3px rgba(13,17,23,.08);
+  box-shadow: 0 0 0 3px rgba(20, 19, 16, 0.12);
 }
 .input-icon {
   width: 20px;
@@ -750,7 +767,7 @@ img { display: block; max-width: 100%; }
 .radar-polygon {
   stroke: var(--accent);
   stroke-width: 2.5;
-  fill: rgba(229, 91, 45, 0.18);
+  fill: rgba(184, 55, 19, 0.20);
   transition: all 0.4s ease;
 }
 .radar-node {
@@ -1123,7 +1140,7 @@ img { display: block; max-width: 100%; }
   font-family: var(--mono);
   transition: border-color var(--transition), box-shadow var(--transition);
 }
-.text-input:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(13,17,23,.08); outline: none; }
+.text-input:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(20, 19, 16, 0.12); outline: none; }
 .vs-badge {
   font-size: 14px;
   font-weight: 700;
@@ -1368,10 +1385,10 @@ img { display: block; max-width: 100%; }
 /* ═══════════════════════════════════════════════════════════════
    VERDICT PILL VARIANTS
 ═══════════════════════════════════════════════════════════════ */
-.verdict-pill.strong    { background: var(--green-bg);  color: var(--green);  border-color: rgba(26,127,55,.3); }
-.verdict-pill.excellent { background: var(--blue-bg);   color: var(--blue);   border-color: rgba(5,80,174,.3); }
-.verdict-pill.developing{ background: var(--yellow-bg); color: var(--yellow); border-color: rgba(154,103,0,.3); }
-.verdict-pill.weak      { background: var(--red-bg);    color: var(--red);    border-color: rgba(207,34,46,.3); }
+.verdict-pill.strong    { background: var(--green-bg);  color: var(--green);  border-color: rgba(19,102,41,.3); }
+.verdict-pill.excellent { background: var(--blue-bg);   color: var(--blue);   border-color: rgba(8,74,150,.3); }
+.verdict-pill.developing{ background: var(--yellow-bg); color: var(--yellow); border-color: rgba(120,80,0,.3); }
+.verdict-pill.weak      { background: var(--red-bg);    color: var(--red);    border-color: rgba(168,26,34,.3); }
 
 
 /* ═══════════════════════════════════════════════════════════════
