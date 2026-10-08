@@ -175,7 +175,7 @@ function serveStaticFile(req, res, pathname) {
     setSecurityHeaders(res);
     res.setHeader('Content-Type', contentType);
     res.setHeader('Content-Length', stats.size);
-    res.setHeader('Cache-Control', 'public, max-age=3600');
+    res.setHeader('Cache-Control', 'no-cache, must-revalidate');
 
     const stream = fs.createReadStream(filePath);
     stream.on('error', () => {

@@ -7,10 +7,10 @@
 
 /* ── Design Tokens ── */
 :root {
-  --bg:            rgba(237, 211, 119, 0.40);
-  --bg-grid:       rgba(26, 25, 23, 0.05);
-  --surface:       #FFFDF5;
-  --surface-hover: #F8F1D2;
+  --bg:            #FCF0DA;
+  --bg-grid:       rgba(26, 25, 23, 0.07);
+  --surface:       #FFFFFF;
+  --surface-hover: #FBF6EC;
   --border:        rgba(26, 25, 23, 0.12);
   --border-strong: rgba(26, 25, 23, 0.24);
 
@@ -48,12 +48,11 @@
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html {
-  background-color: #FFFFFF;
+  background-color: var(--bg);
   background-image:
     linear-gradient(to right, var(--bg-grid) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--bg-grid) 1px, transparent 1px),
-    linear-gradient(var(--bg), var(--bg));
-  background-size: 28px 28px, 28px 28px, 100% 100%;
+    linear-gradient(to bottom, var(--bg-grid) 1px, transparent 1px);
+  background-size: 28px 28px;
   color: var(--ink);
   font-family: var(--font);
   font-size: 15px;
@@ -81,7 +80,7 @@ img { display: block; max-width: 100%; }
   top: 0;
   z-index: 100;
   height: var(--header-h);
-  background: rgba(255, 252, 242, 0.90);
+  background: rgba(252, 240, 218, 0.92);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
