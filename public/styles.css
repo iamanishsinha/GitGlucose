@@ -7,12 +7,12 @@
 
 /* ── Design Tokens ── */
 :root {
-  --bg:            #EDD377;
-  --bg-grid:       rgba(26, 25, 23, 0.08);
+  --bg:            rgba(237, 211, 119, 0.40);
+  --bg-grid:       rgba(26, 25, 23, 0.05);
   --surface:       #FFFDF5;
   --surface-hover: #F8F1D2;
-  --border:        rgba(26, 25, 23, 0.14);
-  --border-strong: rgba(26, 25, 23, 0.28);
+  --border:        rgba(26, 25, 23, 0.12);
+  --border-strong: rgba(26, 25, 23, 0.24);
 
   --ink:           #141310;
   --ink-2:         #2B2822;
@@ -48,11 +48,12 @@
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html {
-  background-color: var(--bg);
+  background-color: #FFFFFF;
   background-image:
     linear-gradient(to right, var(--bg-grid) 1px, transparent 1px),
-    linear-gradient(to bottom, var(--bg-grid) 1px, transparent 1px);
-  background-size: 28px 28px;
+    linear-gradient(to bottom, var(--bg-grid) 1px, transparent 1px),
+    linear-gradient(var(--bg), var(--bg));
+  background-size: 28px 28px, 28px 28px, 100% 100%;
   color: var(--ink);
   font-family: var(--font);
   font-size: 15px;
@@ -80,7 +81,7 @@ img { display: block; max-width: 100%; }
   top: 0;
   z-index: 100;
   height: var(--header-h);
-  background: rgba(237, 211, 119, 0.92);
+  background: rgba(255, 252, 242, 0.90);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
