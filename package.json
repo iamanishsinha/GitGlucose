@@ -1,0 +1,28 @@
+{
+  "name": "gitglucose",
+  "version": "1.0.0",
+  "description": "GitGlucose — Roast the Git. Rescue with Glucose. GitHub Portfolio Intelligence.",
+  "main": "server/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node --watch server/index.js",
+    "test": "node --test test/*.test.js",
+    "verify": "node scripts/verify-submission.js"
+  },
+  "keywords": [
+    "github",
+    "portfolio",
+    "audit",
+    "roast",
+    "rescue",
+    "recruiter",
+    "developer-tools",
+    "gemini"
+  ],
+  "author": "GitGlucose Team",
+  "license": "MIT",
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

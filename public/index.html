@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GitGlucose — Roast the Git. Rescue with Glucose.</title>
+  <meta name="description" content="A modern GitHub portfolio auditor. Get an honest roast, see the evidence, and get a step-by-step rescue plan.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+
+  <!-- Screen reader live announcements -->
+  <div id="status-live-region" class="sr-only" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- ===== HEADER / TOP NAV ===== -->
+  <header class="app-header" id="app-header">
+    <div class="header-inner">
+      <!-- Brand -->
+      <a href="#" class="brand-logo" id="brand-home-link" aria-label="GitGlucose Home">
+        <svg class="brand-octocat" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
+        </svg>
+        <span class="brand-name">GitGlucose</span>
+      </a>
+
+      <!-- Step Tabs (hidden until audit runs) -->
+      <nav class="step-tabs-nav hidden" id="step-tabs-nav" aria-label="Audit Steps">
+        <button class="step-tab active" data-step="1">
+          <span class="tab-num">1</span>
+          <span class="tab-label">Quick Roast</span>
+        </button>
+        <button class="step-tab" data-step="2">
+          <span class="tab-num">2</span>
+          <span class="tab-label">Deep Dive</span>
+        </button>
+        <button class="step-tab" data-step="3">
+          <span class="tab-num">3</span>
+          <span class="tab-label">Rescue Plan</span>
+        </button>
+        <button class="step-tab" data-step="4">
+          <span class="tab-num">4</span>
+          <span class="tab-label">Career Fit</span>
+        </button>
+        <button class="step-tab" data-step="5">
+          <span class="tab-num">5</span>
+          <span class="tab-label">Compare</span>
+        </button>
+      </nav>
+
+      <!-- Header actions -->
+      <div class="header-actions">
+        <button class="btn btn-ghost" id="btn-export-markdown" disabled title="Export Markdown report">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Export .md
+        </button>
+        <button class="btn btn-ghost hidden" id="btn-new-audit">New Audit</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== MAIN ===== -->
+  <main class="app-main" id="main-content">
+
+    <!-- ================================================================
+         LANDING / SEARCH VIEW (default, shown before any audit)
+    ================================================================ -->
+    <section class="landing-view" id="landing-view">
+      <div class="landing-inner">
+
+        <!-- Hero badge -->
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          GitHub Portfolio Intelligence
+        </div>
+
+        <!-- Headline -->
+        <h1 class="hero-headline">
+          Roast the Git.<br>
+          <span class="headline-accent">Rescue with Glucose.</span>
+        </h1>
+
+        <p class="hero-sub">
+          Most GitHub profiles fail the 30-second recruiter test. Enter yours below — we'll analyze every repo, show you exactly why visitors bounce, and hand you a step-by-step recovery plan.
+        </p>
+
+        <!-- Search card -->
+        <div class="search-card">
+          <form id="audit-form" class="search-form" role="search">
+            <div class="input-group">
+              <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+              </svg>
+              <input
+                type="text"
+                id="username-input"
+                name="user"
+                class="search-input"
+                placeholder="Enter GitHub username or profile URL"
+                value=""
+                autocomplete="off"
+                autocapitalize="off"
+                spellcheck="false"
+                required
+              >
+              <button type="submit" id="submit-audit-btn" class="btn btn-primary btn-audit">
+                Audit Profile →
+              </button>
+            </div>
+
+            <!-- Tone row -->
+            <div class="search-meta-row">
+              <div class="tone-group" role="radiogroup" aria-label="Roast tone">
+                <span class="meta-label">Tone:</span>
+                <label class="tone-chip">
+                  <input type="radio" name="tone" value="gentle"> <span>Gentle</span>
+                </label>
+                <label class="tone-chip">
+                  <input type="radio" name="tone" value="medium" checked> <span>Medium</span>
+                </label>
+                <label class="tone-chip">
+                  <input type="radio" name="tone" value="spicy"> <span>Spicy 🔥</span>
+                </label>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- Stats bar -->
+        <div class="landing-stats">
+          <div class="stat-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            5-Axis Score Model
+          </div>
+          <div class="stat-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            30-Second Recruiter Sim
+          </div>
+          <div class="stat-pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Zero Token Drain
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================================
+         ERROR BANNER (shown on API errors)
+    ================================================================ -->
+    <div id="error-banner" class="error-banner hidden" role="alert">
+      <div class="error-inner">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        <span id="error-message">Something went wrong.</span>
+        <button type="button" id="btn-close-error" class="error-close" aria-label="Dismiss error">✕</button>
+      </div>
+    </div>
+
+    <!-- ================================================================
+         LOADING STATE
+    ================================================================ -->
+    <section id="loading-state" class="loading-view hidden">
+      <div class="loading-card">
+        <div class="loading-spinner"></div>
+        <h2 class="loading-title">Analyzing GitHub Profile…</h2>
+        <p id="loading-step-text" class="loading-sub">Connecting to GitHub API…</p>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         RESULTS CONTAINER (5-step tab panels)
+    ================================================================ -->
+    <div id="audit-results-container" class="results-container hidden">
+
+      <!-- ────────────── STEP 1: QUICK ROAST ────────────── -->
+      <div class="tab-panel active" id="panel-step-1" role="tabpanel">
+        <div class="panel-layout">
+
+          <!-- LEFT COLUMN -->
+          <div class="panel-left">
+            <!-- User Card -->
+            <div class="card user-card">
+              <div class="user-card-inner">
+                <div class="user-avatar-wrap">
+                  <img id="display-user-avatar" class="user-avatar" src="" alt="Avatar">
+                </div>
+                <div class="user-info">
+                  <h2 class="user-handle" id="profile-handle-target">@username</h2>
+                  <p class="user-bio" id="display-user-bio">—</p>
+                  <span class="snapshot-tag" id="display-snapshot-time">Snapshot: recent</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Score Card -->
+            <div class="card score-card">
+              <div class="score-ring-wrap">
+                <svg class="score-ring" viewBox="0 0 120 120">
+                  <circle class="ring-track" cx="60" cy="60" r="50" stroke-dasharray="314" stroke-dashoffset="0"/>
+                  <circle class="ring-fill" id="score-ring-fill" cx="60" cy="60" r="50" stroke-dasharray="314" stroke-dashoffset="314"/>
+                </svg>
+                <div class="score-ring-center">
+                  <span class="score-number" id="display-overall-score">--</span>
+                  <span class="score-denom">/100</span>
+                </div>
+              </div>
+              <div class="score-label-area">
+                <div class="verdict-pill" id="display-verdict-label">--</div>
+                <p class="verdict-desc" id="display-verdict-desc">—</p>
+              </div>
+            </div>
+
+            <!-- Quick Stats -->
+            <div class="card stats-card">
+              <h3 class="card-title">Quick Stats</h3>
+              <div class="stats-grid">
+                <div class="stat-item">
+                  <span class="stat-label">Language</span>
+                  <strong class="stat-val" id="quick-stat-lang">—</strong>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Repositories</span>
+                  <strong class="stat-val" id="quick-stat-repos">—</strong>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Total Stars</span>
+                  <strong class="stat-val" id="quick-stat-stars">—</strong>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Last Push</span>
+                  <strong class="stat-val" id="quick-stat-activity">—</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN -->
+          <div class="panel-right">
+            <!-- Roast Box -->
+            <div class="card roast-card">
+              <div class="card-header">
+                <h3 class="card-title">🔥 The Honest Roast</h3>
+                <span class="card-badge">Real observations · no sugar-coating</span>
+              </div>
+              <div class="roast-lines" id="roast-lines-container">
+                <!-- JS fills -->
+              </div>
+            </div>
+
+            <!-- Bio Suggestion -->
+            <div class="card bio-card">
+              <div class="card-header">
+                <h3 class="card-title">💡 Better Bio for Recruiters</h3>
+              </div>
+              <p class="bio-suggestion-text" id="suggested-bio-text">—</p>
+              <button type="button" class="btn btn-secondary" id="btn-copy-bio">Copy Bio</button>
+            </div>
+
+            <!-- Journey fork -->
+            <div class="fork-row">
+              <div class="fork-card fork-dive" id="btn-go-deep-roast" tabindex="0" role="button">
+                <div class="fork-icon">📊</div>
+                <div class="fork-body">
+                  <strong class="fork-title">Explore Deep Dive & Evidence →</strong>
+                  <span class="fork-sub">5-axis radar, recruiter simulation, repo rankings</span>
+                </div>
+              </div>
+              <div class="fork-card fork-rescue" id="btn-go-rescue-direct" tabindex="0" role="button">
+                <div class="fork-icon">🍬</div>
+                <div class="fork-body">
+                  <strong class="fork-title">Jump to Rescue Plan →</strong>
+                  <span class="fork-sub">30-min quick wins and 7-day action sprint</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ────────────── STEP 2: DEEP DIVE ────────────── -->
+      <div class="tab-panel hidden" id="panel-step-2" role="tabpanel">
+        <div class="panel-layout">
+
+          <div class="panel-left">
+            <!-- Radar -->
+            <div class="card radar-card">
+              <div class="card-header">
+                <h3 class="card-title">5-Axis Health Radar</h3>
+                <span class="card-badge">computed score model</span>
+              </div>
+              <div class="radar-wrap">
+                <svg class="radar-svg" viewBox="0 0 300 280" fill="none">
+                  <!-- Guide rings -->
+                  <circle cx="150" cy="140" r="110" class="radar-ring"/>
+                  <circle cx="150" cy="140" r="77" class="radar-ring"/>
+                  <circle cx="150" cy="140" r="44" class="radar-ring"/>
+                  <!-- Axes -->
+                  <line x1="150" y1="30" x2="150" y2="250" class="radar-axis"/>
+                  <line x1="40" y1="140" x2="260" y2="140" class="radar-axis"/>
+                  <!-- Score polygon -->
+                  <polygon id="radar-polygon" points="150,60 230,105 210,210 90,210 70,105" class="radar-polygon"/>
+                  <!-- Nodes -->
+                  <circle id="radar-pt-1" cx="150" cy="60" r="5" class="radar-node"/>
+                  <circle id="radar-pt-2" cx="230" cy="105" r="5" class="radar-node"/>
+                  <circle id="radar-pt-3" cx="210" cy="210" r="5" class="radar-node"/>
+                  <circle id="radar-pt-4" cx="90" cy="210" r="5" class="radar-node"/>
+                  <circle id="radar-pt-5" cx="70" cy="105" r="5" class="radar-node"/>
+                  <!-- Labels -->
+                  <text x="150" y="20" text-anchor="middle" class="radar-lbl">Impression</text>
+                  <text x="264" y="112" text-anchor="start" class="radar-lbl">Hygiene</text>
+                  <text x="220" y="264" text-anchor="start" class="radar-lbl">Substance</text>
+                  <text x="80" y="264" text-anchor="end" class="radar-lbl">Activity</text>
+                  <text x="36" y="112" text-anchor="end" class="radar-lbl">Range</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-right">
+            <!-- Score Breakdown -->
+            <div class="card">
+              <h3 class="card-title">Score Breakdown</h3>
+              <div class="score-bars">
+                <div class="bar-group">
+                  <div class="bar-header">
+                    <span>First Impression</span>
+                    <strong id="score-val-first-impression">-- / 100</strong>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" id="bar-first-impression" style="width:0%"></div></div>
+                  <span class="bar-hint">Bio, title, profile README, avatar</span>
+                </div>
+                <div class="bar-group">
+                  <div class="bar-header">
+                    <span>Code Hygiene</span>
+                    <strong id="score-val-hygiene">-- / 100</strong>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" id="bar-hygiene" style="width:0%"></div></div>
+                  <span class="bar-hint">READMEs, descriptions, licenses</span>
+                </div>
+                <div class="bar-group">
+                  <div class="bar-header">
+                    <span>Code Substance</span>
+                    <strong id="score-val-substance">-- / 100</strong>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" id="bar-substance" style="width:0%"></div></div>
+                  <span class="bar-hint">Original work vs forks vs tutorials</span>
+                </div>
+                <div class="bar-group">
+                  <div class="bar-header">
+                    <span>Push Momentum</span>
+                    <strong id="score-val-activity">-- / 100</strong>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" id="bar-activity" style="width:0%"></div></div>
+                  <span class="bar-hint">Commit frequency and recency</span>
+                </div>
+                <div class="bar-group">
+                  <div class="bar-header">
+                    <span>Language Range</span>
+                    <strong id="score-val-range">-- / 100</strong>
+                  </div>
+                  <div class="bar-track"><div class="bar-fill" id="bar-range" style="width:0%"></div></div>
+                  <span class="bar-hint">Stack breadth and adaptability</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Recruiter Simulation -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">30-Second Recruiter Scan</h3>
+                <div class="shortlist-badge" id="shortlist-status-badge">MAYBE</div>
+              </div>
+              <p class="card-sub">Recruiters decide in 30 seconds whether to shortlist or pass. Here's what they see on your profile:</p>
+              <div class="recruiter-timeline" id="recruiter-timeline-container">
+                <!-- JS fills -->
+              </div>
+            </div>
+
+            <!-- Repository table -->
+            <div class="card">
+              <h3 class="card-title">Repository Signal Table</h3>
+              <p class="card-sub">Ranked by quality — pin the high-signal ones, archive the noise.</p>
+              <div class="table-wrap">
+                <table class="data-table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Repository</th>
+                      <th>Language</th>
+                      <th>Stars</th>
+                      <th>Signal</th>
+                      <th>Score</th>
+                    </tr>
+                  </thead>
+                  <tbody id="repositories-table-body">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Nav -->
+            <div class="panel-nav-row">
+              <button class="btn btn-ghost btn-back-to-roast">← Back to Roast</button>
+              <button class="btn btn-primary" id="btn-deep-to-rescue">
+                🍬 Rescue <span class="nav-target-name">@user</span> →
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ────────────── STEP 3: RESCUE PLAN ────────────── -->
+      <div class="tab-panel hidden" id="panel-step-3" role="tabpanel">
+        <div class="panel-layout">
+
+          <div class="panel-left">
+            <!-- Projection -->
+            <div class="card projection-card">
+              <span class="card-eyebrow">Projected Recovery Score</span>
+              <div class="projection-scores">
+                <div class="proj-score-box">
+                  <span class="proj-lbl">Current</span>
+                  <strong class="proj-num" id="proj-current-score">--</strong>
+                </div>
+                <div class="proj-arrow">→</div>
+                <div class="proj-score-box proj-potential">
+                  <span class="proj-lbl">Potential</span>
+                  <strong class="proj-num" id="proj-potential-score">--</strong>
+                </div>
+              </div>
+              <div class="proj-bar-wrap">
+                <div class="bar-track"><div class="bar-fill proj-bar-fill" id="bar-rescue-projection" style="width:50%"></div></div>
+              </div>
+              <p class="proj-caption" id="proj-delta-badge">Check tasks below to boost your score in real time</p>
+            </div>
+
+            <!-- Plan tabs -->
+            <div class="card plan-tab-card">
+              <h3 class="card-title" id="rescue-personalized-title">Rescue @username</h3>
+              <p class="card-sub">Complete tasks below — your score updates live as you check them off.</p>
+              <div class="plan-tabs">
+                <button class="plan-tab active" id="btn-toggle-30m">⚡ 30-Min Quick Wins</button>
+                <button class="plan-tab" id="btn-toggle-7d">📅 7-Day Sprint</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-right">
+            <!-- 30-min tasks -->
+            <div class="card task-card" id="rescue-30-ledger">
+              <div class="card-header">
+                <h3 class="card-title">⚡ 30-Minute Emergency Fixes</h3>
+                <span class="card-badge">immediate · high impact</span>
+              </div>
+              <p class="card-sub">These are the fastest wins. Do them right now — each one visibly improves how recruiters see your profile.</p>
+              <div class="task-list" id="rescue-30-tasks-container">
+                <!-- JS fills -->
+              </div>
+            </div>
+
+            <!-- 7-day plan -->
+            <div class="card task-card hidden" id="rescue-7d-ledger">
+              <div class="card-header">
+                <h3 class="card-title">📅 7-Day Portfolio Revival</h3>
+                <span class="card-badge">structured sprint</span>
+              </div>
+              <p class="card-sub">A daily guide to transform your GitHub into an interview magnet.</p>
+              <div class="task-list" id="rescue-7d-days-container">
+                <!-- JS fills -->
+              </div>
+            </div>
+
+            <!-- Nav -->
+            <div class="panel-nav-row">
+              <button class="btn btn-ghost btn-back-to-deep">← Deep Dive</button>
+              <button class="btn btn-primary" id="btn-rescue-to-career">🎯 Check Career Fit →</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ────────────── STEP 4: CAREER FIT ────────────── -->
+      <div class="tab-panel hidden" id="panel-step-4" role="tabpanel">
+        <div class="panel-layout">
+
+          <div class="panel-left">
+            <!-- Role selector & gauge -->
+            <div class="card gauge-card">
+              <div class="card-header">
+                <h3 class="card-title">Target Role</h3>
+              </div>
+              <select id="target-role-select" class="role-select">
+                <option value="full-stack">Full Stack Developer</option>
+                <option value="backend">Backend Developer</option>
+                <option value="frontend">Frontend Developer</option>
+                <option value="ai-ml">AI / ML Engineer</option>
+                <option value="devops">DevOps / Cloud Engineer</option>
+                <option value="software-engineer">Generalist Software Engineer</option>
+              </select>
+
+              <div class="match-gauge">
+                <div class="match-pct" id="role-score-circle">--%</div>
+                <span class="match-label">Role Alignment Match</span>
+                <p class="match-statement" id="role-score-statement">Select a role to compute your alignment score.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="panel-right">
+            <!-- Evidence -->
+            <div class="card">
+              <h3 class="card-title">✅ Verified Skills in Your Repos</h3>
+              <ul class="skills-list" id="role-matched-list">
+                <!-- JS fills -->
+              </ul>
+            </div>
+
+            <!-- Next build tip -->
+            <div class="card tip-card">
+              <h3 class="card-title">💡 Recommended Next Build</h3>
+              <p class="tip-text" id="role-recommended-build">
+                Building one end-to-end project with auth and a live demo will significantly boost this score.
+              </p>
+            </div>
+
+            <!-- Nav -->
+            <div class="panel-nav-row career-actions-row">
+              <button type="button" class="btn btn-primary" id="btn-career-to-rescue">
+                Complete Roast &amp; Rescue &rarr;
+              </button>
+              <button type="button" class="btn btn-secondary" id="btn-career-to-compare">
+                Compare with Other's Profile &rarr;
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ────────────── STEP 5: COMPARE ────────────── -->
+      <div class="tab-panel hidden" id="panel-step-5" role="tabpanel">
+
+        <!-- Compare form -->
+        <div class="card compare-form-card">
+          <div class="card-header">
+            <h3 class="card-title">⚔️ Head-to-Head Comparison</h3>
+            <span class="card-badge">side-by-side analysis</span>
+          </div>
+          <p class="card-sub">Compare your audited portfolio directly against any public GitHub profile or peer URL.</p>
+          <form id="compare-form" class="compare-form">
+            <div class="compare-inputs">
+              <div class="compare-input-col">
+                <label class="input-label" for="compare-user-a">Profile A (Current Audit)</label>
+                <input type="text" id="compare-user-a" class="text-input" placeholder="Audited profile URL" readonly>
+              </div>
+              <div class="vs-badge">VS</div>
+              <div class="compare-input-col">
+                <label class="input-label" for="compare-user-b">Profile B (Compare Against)</label>
+                <input type="text" id="compare-user-b" class="text-input" placeholder="Enter GitHub profile URL" value="" autocomplete="off" required>
+              </div>
+            </div>
+            <button type="submit" id="btn-run-compare" class="btn btn-primary">Compare Now →</button>
+          </form>
+
+          <!-- Inline Compare Error Banner -->
+          <div id="compare-error-banner" class="error-inner hidden" style="margin-top:16px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+            <span id="compare-error-message"></span>
+          </div>
+
+          <!-- Inline Compare Loading State -->
+          <div id="compare-loading-state" class="loading-card hidden" style="padding:28px 0;">
+            <div class="loading-spinner"></div>
+            <p style="font-size:14px;color:var(--ink-2);font-weight:600;margin-top:12px;">Fetching and analyzing both profiles side-by-side...</p>
+          </div>
+        </div>
+
+        <!-- Compare Results -->
+        <div id="compare-results-wrapper" class="hidden">
+
+          <!-- Winner Announcement Card -->
+          <div class="card cmp-winner-card" id="cmp-winner-card" style="margin-bottom:20px;">
+            <div class="cmp-winner-badge">🏆 OVERALL STRONGER PORTFOLIO</div>
+            <h3 class="cmp-winner-title" id="cmp-winner-title">--</h3>
+            <p class="cmp-winner-desc" id="cmp-winner-desc">--</p>
+          </div>
+
+          <!-- Category Winners Grid -->
+          <div class="card" style="margin-bottom:20px;">
+            <h3 class="card-title">🏅 Category-by-Category Winners</h3>
+            <p class="card-sub">Head-to-head winner across each core portfolio dimension:</p>
+            <div class="cmp-cat-grid" id="cmp-categories-container"></div>
+          </div>
+
+          <!-- Overview Cards -->
+          <div class="compare-overview">
+            <div class="card compare-user-card" id="cmp-card-a"></div>
+            <div class="compare-divider">VS</div>
+            <div class="card compare-user-card" id="cmp-card-b"></div>
+          </div>
+
+          <!-- Metric Bars -->
+          <div class="card" style="margin-bottom:20px;">
+            <h3 class="card-title">📊 Visual Metrics Comparison Chart</h3>
+            <p class="card-sub">Side-by-side comparison on all 9 core portfolio dimensions</p>
+            <div class="compare-bars" id="compare-bars-container"></div>
+          </div>
+
+          <!-- Strengths & Improvements Grid -->
+          <div class="compare-overview" style="margin-bottom:20px;">
+            <div class="card">
+              <h3 class="card-title" id="cmp-strengths-a-title">Strengths of Profile A</h3>
+              <ul class="skills-list" id="cmp-strengths-a-list" style="margin-top:12px;"></ul>
+              <h4 class="card-title" style="margin-top:20px;font-size:14px;" id="cmp-improv-a-title">Areas where Profile A can improve:</h4>
+              <ul class="skills-list" id="cmp-improv-a-list" style="margin-top:10px;"></ul>
+            </div>
+            <div class="compare-divider" style="opacity:0;">VS</div>
+            <div class="card">
+              <h3 class="card-title" id="cmp-strengths-b-title">Strengths of Profile B</h3>
+              <ul class="skills-list" id="cmp-strengths-b-list" style="margin-top:12px;"></ul>
+              <h4 class="card-title" style="margin-top:20px;font-size:14px;" id="cmp-improv-b-title">Areas where Profile B can improve:</h4>
+              <ul class="skills-list" id="cmp-improv-b-list" style="margin-top:10px;"></ul>
+            </div>
+          </div>
+
+          <!-- Top Repos -->
+          <div class="compare-repos">
+            <div class="card" id="cmp-repos-a"></div>
+            <div class="card" id="cmp-repos-b"></div>
+          </div>
+
+          <!-- Takeaways -->
+          <div class="card">
+            <h3 class="card-title">💡 Objective Recruiter Takeaways</h3>
+            <ul class="takeaways-list" id="compare-observations-list"></ul>
+          </div>
+
+        </div>
+
+        <!-- Nav -->
+        <div class="panel-nav-row" style="margin-top:24px;">
+          <button type="button" class="btn btn-ghost btn-back-to-career">← Career Fit</button>
+          <button type="button" class="btn btn-primary" id="btn-new-audit-inline">Audit Another Profile ↑</button>
+        </div>
+
+      </div>
+
+    </div><!-- end results container -->
+
+  </main>
+
+  <!-- Toast notifications -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
