@@ -1,0 +1,8 @@
+{
+  "name": "GitGlucose",
+  "description": "A modern GitHub portfolio auditor. Get an honest roast, see the evidence, and get a step-by-step rescue plan.",
+  "requestFramePermissions": [],
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

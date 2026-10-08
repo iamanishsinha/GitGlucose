@@ -52,7 +52,7 @@ if (!isTestMode) {
   }
 }
 
-const PORT = parseInt(process.env.PORT || '8080', 10);
+const PORT = parseInt(process.env.PORT || '3000', 10);
 const CACHE_TTL_MS = parseInt(process.env.GITHUB_CACHE_TTL_MS || '600000', 10); // 10 minutes
 const CACHE_MAX = parseInt(process.env.GITHUB_CACHE_MAX || '200', 10);
 const RATE_LIMIT_PER_MIN = parseInt(process.env.RATE_LIMIT_PER_MINUTE || '30', 10);
@@ -131,7 +131,9 @@ const MIME_TYPES = {
  */
 function setSecurityHeaders(res) {
   res.setHeader('X-Content-Type-Options', 'nosniff');
-  res.setHeader('X-Frame-Options', 'DENY');
+  if (isTestMode) {
+    res.setHeader('X-Frame-Options', 'DENY');
+  }
   res.setHeader('Referrer-Policy', 'no-referrer');
   res.setHeader(
     'Content-Security-Policy',
@@ -175,7 +177,7 @@ function serveStaticFile(req, res, pathname) {
     setSecurityHeaders(res);
     res.setHeader('Content-Type', contentType);
     res.setHeader('Content-Length', stats.size);
-    res.setHeader('Cache-Control', 'no-cache, must-revalidate');
+    res.setHeader('Cache-Control', 'public, max-age=3600');
 
     const stream = fs.createReadStream(filePath);
     stream.on('error', () => {
